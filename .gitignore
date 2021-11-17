@@ -18,6 +18,12 @@ key.txt
 Tweeting/Creds.py
 Tweeting/Creds2.py
 
+# Logging data
+Tweeting/*.log
+
+# General note file
+notes.txt
+
 # General Python stuff
 venv/
 __pycache__/

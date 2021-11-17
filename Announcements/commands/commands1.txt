@@ -1,0 +1,16 @@
+>>> **Dueling channel commands**
+
+**!fight** - Fight a match between 1 or 2 CryptoStykz. This can be used to fight your specific NFT against a random one by only
+using one argument as shown below. Only works in "dueling" channel.
+``!fight #175 #829``
+or
+``!fight #420``
+
+**!rfight** - Fight a match between 2 randomly selected CryptoStykz. Only works in "dueling" channel.
+``!rfight``
+
+**!display** - Shows the image generated for a CryptoStykz NFT. Only works in "dueling" channel.
+``!display #564``
+
+**!specs** - Shows the rarity for each component of a CryptoStykz NFT. Only works in "betting" and "dueling" channel.
+``!specs #295``

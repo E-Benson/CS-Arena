@@ -1,0 +1,18 @@
+>>> **Leaderboard channel commands**
+
+**!leaders** - Displays the leaderboard for the CryptoStykz with the most fights won. Only works in "leaderboard" channel.
+``!leaders``
+
+**!pointleaders** - Sends a picture of the current leaderboard rankings based on total points for each user to the "leaderboard" channel
+``!pointleaders``
+
+**!myrank** - Sends a direct message to you telling you what your current rank is on the points leaderboard.
+``!myrank``
+
+**General commands**
+
+**!mypoints** - Sends a direct message to you telling you how many points you currently have available
+``!mypoints``
+
+**!flex** - Shows how many points you currently have in the "betting" channel. Only works in "betting" channel
+``!flex``

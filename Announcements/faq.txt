@@ -1,0 +1,21 @@
+>>> **Where can I get official updates about CryptoStykz?**
+Official announcements regarding the release of new CryptoStykz and improvements made to the fun things you can do with them will be on the Twitter (@CryptoStykz), and in the Announcements channel of this Discord server.
+
+**What does the "rarity" mean?**
+When each CryptoStykz NFT is generated, it is made of several components that are randomly selected from a set of categories. Each component has a likelihood of being used in the generation of a new NFT, and the more rare a certain component is the lower its "rarity" will be. The rarity of a certain NFT is the sum of all of the components.
+
+**How do the fights work?**
+Each match consists of 5 rounds. When two CryptoStykz of the same rarity fight there is a 50/50 chance for each one to win a round, and when one is rarer than the other the chances of the rarer one winning increases based on the difference. So if one NFT has a rarity of 1 and the other has a rarity of 2, then odds are 75/25 in favor of the lower rarity.
+There is a "queue" of stick fights (think of it as a line of bad-boys who want to fight each other) and the next fight in the queue is announced every minute in the "fighting" channel.
+Anyone can add a pair of CryptoStykz #'s to the queue if they would like to see that specific matchup, and if no user-given matchups are in the queue then a random matchup will be selected
+Everyone has 30 seconds to place their bets on which CryptoStykz NFT will win the match, and at the end of the betting period a winner will be decided.
+
+**How does the betting work?**
+When you join the Discord you are given 5000 points, and every week everyone is reset back to 5000 points. If you lose all of your points you will be reset back to 500.
+Every minute when a fight is announced in the "fighting" channel, you will have 30 seconds to use the ``!bet`` command to place a bet on the NFT you think will win the match.
+At the end of the 30 second betting period, the total points that people placed on one stick is compared to the total for the other and the ratio of those totals decides your payout if your bet wins.
+If your bet loses, you lose the points that you placed on the bet.
+
+**Where can I see a list of commands and how to use them?**
+In the "commands" channel you will find a list of commands with a description of each one and an example of how it is used.
+

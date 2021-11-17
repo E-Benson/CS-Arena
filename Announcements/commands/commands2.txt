@@ -1,0 +1,21 @@
+>>> **Fighting channel commands**
+
+**!bet** - Places a bet for a specified amount of points on a CryptoStykz # in an upcoming match. Can be shortened to just ``!b`` instead of ``!bet``. Only works in "betting" channel.
+``!bet 5000 #14``
+
+
+**!allin** - Places a bet with all of your current points on a CryptoStykz #. Only works in "betting" channel
+``!allin #520``
+
+**!add** - Adds a pair of CryptoStykz #'s to the queue of battles, and responds with your pair's position in the queue. Only works in the "fighting" channel.
+``!add #506 #253``
+
+**!nextfight** - Shows the two CryptoStykz that are next in the queue to fight. Can be shortened to ``!n`` or ``!next`` instead of ``!nextfight``. Only works in "betting" channel
+``!nextfight``
+or
+``!next``
+
+**!queue** - Shows up to the next 5 fights that are in the queue. This does not display *all* fights in the queue. Can be shortened to ``!q``. Only works in "betting" channel.
+``!queue``
+or
+``!q``

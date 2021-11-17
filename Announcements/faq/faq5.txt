@@ -1,0 +1,2 @@
+>>> **Where can I see a list of commands and how to use them?**
+In the "commands" channel you will find a list of commands with a description of each one and an example of how it is used.

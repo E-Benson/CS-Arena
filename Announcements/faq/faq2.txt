@@ -1,0 +1,3 @@
+>>> **What does the "rarity" mean?**
+When each CryptoStykz NFT is generated, it is made of several components that are randomly selected from a set of categories. Each component has a likelihood of being used in the generation of a new NFT, and the more rare a certain component is the lower its "rarity" will be. The rarity of a certain NFT is the sum of all of the components. In short, *lower rarity means it is better*.
+*NOTE: Each CryptoStykz NFT is completely unique and one-of-a-kind.*

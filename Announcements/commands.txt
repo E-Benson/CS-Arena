@@ -1,0 +1,98 @@
+>>>
+
+**Dueling channel commands**
+
+**!fight**
+Fight a match between 1 or 2 CryptoStykz. This can be used to fight your specific NFT against a random one by only
+using one argument as shown below.
+Only works in "dueling" channel.
+``!fight <CryptoStykz #> <CryptoStykz #>``
+``!fight #175 #829``
+or
+``!fight <CryptoStykz #>``
+``!fight #420``
+
+**!rfight**
+Fight a match between 2 randomly selected CryptoStykz.
+Only works in "dueling" channel.
+``!rfight``
+
+**!display**
+Shows the image generated for a CryptoStykz NFT.
+Only works in "dueling" channel.
+``!display <CryptoStykz #>``
+``!display #564``
+
+**!specs**
+Shows the rarity for each component of a CryptoStykz NFT.
+Only works in "fighting" and "dueling" channel.
+``!specs <CryptoStykz #>``
+``!specs #295``
+
+
+**Fighting channel commands**
+
+**!bet**
+Places a bet for a specified amount of points on a CryptoStykz # in an upcoming match
+Can be shortened to just ``!b`` instead of ``!bet``
+Only works in "fighting" channel.
+``!bet <amount> <CryptoStykz #>``
+``!bet 5000 #14``
+or
+``!b <amount> <CrpytoStykz #>``
+
+**!allin**
+Places a bet with all of your current points on a CryptoStykz #
+Only works in "fighting" channel
+``!allin <CryptoStykz #>``
+``!allin #520``
+
+**!add**
+Adds a pair of CryptoStykz #'s to the queue of battles, and responds with your pair's position in the queue.
+Only works in the "fighting" channel.
+``!add <CryptoStykz #> <CryptoStykz #>``
+``!add #506 #253``
+
+**!nextfight**
+Shows the two CryptoStykz that are next in the queue to fight.
+Can be shortened to ``!n`` or ``!next`` instead of ``!nextfight``
+Only works in "fighting" channel
+``!nextfight``
+or
+``!next``
+or
+``!n``
+
+**!queue**
+Shows up to the next 5 fights that are in the queue. This does not display *all* fights in the queue.
+Can be shortened to ``!q``
+Only works in "fighting" channel
+``!queue``
+or
+``!q``
+
+**!specs**
+Shows the rarity for each component of a CryptoStykz NFT.
+Only works in "fighting" and "dueling" channel.
+``!specs <CryptoStykz #>``
+``!specs #295``
+
+
+**Leaderboard channel commands**
+
+**!leaders**
+Displays the leaderboard for the CryptoStykz with the most fights won.
+Only works in "leaderboard" channel.
+``!leaders``
+
+
+**General commands**
+
+**!mypoints**
+Sends a direct message to you telling you how many points you currently have available
+``!mypoints``
+
+**!flex**
+Shows how many points you currently have in the "fighting" channel.
+Only works in "fighting" channel
+``!flex``

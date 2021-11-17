@@ -1,0 +1,4 @@
+**Welcome to CryptoStykz!**
+As a welcome gift, you'll start off with 5,000 points in your balance to bet with, and all betting takes place in the "fighting" channel.
+I recommend you read through the "commands" channel to get a feel for what's available to you, and the "faq" channel to get and idea of how things work.
+You can also type ``!help`` for a list of commands, or ``!help bet`` for information on the ``!bet`` command.

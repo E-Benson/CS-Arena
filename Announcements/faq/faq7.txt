@@ -1,0 +1,3 @@
+>>> **What do the roles like Elite, or Beginner mean?**
+Every hour the leaderboard is checked to see who falls in the top 5, top 25, and top 50 ranks and sets your role according to your leaderboard position
+Elite - top 5, Veteran - top 25, Intermediate - top 50, Beginner - everyone else

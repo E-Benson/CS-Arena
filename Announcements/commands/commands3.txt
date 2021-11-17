@@ -1,0 +1,21 @@
+>>> **!specs** - Shows the rarity for each component of a CryptoStykz NFT. Only works in "betting" and "dueling" channel.
+``!specs #295``
+
+**display** - Sends a message to the channel you called the command from. Only works in "betting" and "dueling" channels.
+``!display #560``
+
+**!flex** - Shows off how many points you have to everyone in the "fighting" channel. Only works in "betting" channel.
+``!flex``
+
+**!mypoints** - Sends a direct message to you telling you how many points you currently have. Works in any channel
+``!mypoints``
+
+**!nextspecs** - Sends a message in the "betting" channel containing the rarity for each property of each CryptoStykz NFT in an upcoming fight. When the bot says "Place your bets", this command will show the specs for the sticks you will be betting on.
+``!nextspecs``
+
+**!add** - Adds a pair of CryptoStykz NFTs to the end of the fight queue. If there are currently too many matchups already in the queue, you will have to try to add them again later.
+``!add #130 #92``
+
+**!allin** - Places a bet for 100% of your current points on the CryptoStykz # you provided with the command. You can only use this in the "betting" channel, and can only bet on CryptoStykz that are in the next fight in queue.
+``!allin #69``
+

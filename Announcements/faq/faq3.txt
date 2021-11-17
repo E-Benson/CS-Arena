@@ -1,0 +1,11 @@
+>>> **How do I duel?**
+Take your individual fights over to the Dueling channel to match any pair of CryptoStykz NFTs in a 1v1 to see who is superior!
+
+**How do I bet?**
+When you join the Discord you are given 5,000 points to bet on CryptoStykz 1v1 matches with, and if you lose all of your points you will be reset back to 1,000.
+Go to the Betting channel. The Bot will generate random matches every minute, but anyone can add matches to bet on. To place a bet, either use a Quick Bet button or bet a specific number of points with !bet on your favored NFT.
+Everyone has 30 seconds to bet once the match has begun. Payouts are decided based on the total ratio of points in the pot.
+
+**Win bets Win NFTs**
+Free CryptoStykz NFTs will be airdropped to the top 3 players of each week.
+Check your rank on the leaderboards and look for weekly posts in the Rewards channel to see if you've made the cut! Qualifying players at the end of each week will be automatically notified by the Bot to claim their rewards.
