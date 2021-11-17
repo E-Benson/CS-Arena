@@ -1,0 +1,70 @@
+2021-11-16 15:59:49,644:WARNING: spam_search:	Failed to reply to tweet. Already replied to this ID. Tweet ID: [1460640085234311180]
+2021-11-16 16:05:10,887:INFO: spam_search:	Posted new reply: User: [@thisiscarlclub], Followers: [1,107], Tweet age: [0 days 00:00:29.820762]
+2021-11-16 16:05:10,887:INFO: spam_search:		https://twitter.com/thisiscarlclub/status/1460715467090407428
+2021-11-16 16:06:11,222:INFO: post_status:	Posted new status. Tweet_ID: [1460715843394969610]
+2021-11-16 16:06:11,222:INFO: post_status:		https://twitter.com/Trace34007811/status/1460715843394969610
+2021-11-16 16:35:12,904:INFO: spam_search:	Posted new reply: User: [@habitual_truant], Followers: [1,876], Tweet age: [0 days 00:00:51.308638]
+2021-11-16 16:35:12,906:INFO: spam_search:		https://twitter.com/habitual_truant/status/1460722933228212227
+2021-11-16 16:36:12,378:WARNING: post_status:	Media_ID: [1460723395037958160], URL: [https://api.twitter.com/1.1/statuses/update.json?status=There%27s+no+other+way+to+say+it.+%23CryptoStykz+will+DOMINATE+the+%23NFT+world%21%0D%0AIt%27s+the+only+FREE+play+to+earn+%23NFT+on+the+market%2C+and+I+can+WIN+more+just+by+playing%0D%0A%0D%0Ahttps%3A%2F%2Fdiscord.gg%2FsH7Ze9faTv%0D%0A%0D%0AOnly+available+on+OpenSea.io%21%0D%0A%0D%0Aopensea.io%2Fcollection%2Fcryptostykz%0D%0A%0D%0A%23OpenSea+%23NFTCommunity+%23NFTCollector+%23NFTS+%23PlayToEarn+%23P2E&media_ids=1460723395037958160],  JSON:
+{'errors': [{'code': 186, 'message': 'Tweet needs to be a bit shorter.'}]}
+2021-11-16 16:36:12,378:WARNING: post_status:	Failed to post new status.
+2021-11-16 17:05:15,401:INFO: spam_search:	Posted new reply: User: [@Able91642248], Followers: [218], Tweet age: [0 days 00:04:19.271385]
+2021-11-16 17:05:15,401:INFO: spam_search:		https://twitter.com/Able91642248/status/1460729618307203079
+2021-11-16 17:06:13,371:WARNING: post_status:	Media_ID: [1460730949600256000], URL: [https://api.twitter.com/1.1/statuses/update.json?status=What+%23NFT+has+completely+random+and+unique+weapons%2C+stick+figures%2C+backgrounds%2C+and+more%3F%0D%0A%23CryptoStykz+does%2C+and+you+can+even+gamble+on+fights+in+a+Discord+server+to+win+%23FreeNFTs%21%21%0D%0A%0D%0AThere+are+no+other+FREE+play+to+earn+%23NFTs+out+there%2C+not+like+%23CryptoStykz%21%0D%0A%0D%0Ahttps%3A%2F%2Fdiscord.gg%2FsH7Ze9faTv%0D%0A%0D%0AAvailable+on+OpenSea%21%0D%0Aopensea.io%2Fcollection%2Fcryptostykz%0D%0A%0D%0A%23NFTs+%23OpenSea+%23Polygon+%23NFTCommunity+%23NFTCollector+%23Crypto+%23PlayToEarn&media_ids=1460730949600256000],  JSON:
+{'errors': [{'code': 186, 'message': 'Tweet needs to be a bit shorter.'}]}
+2021-11-16 17:06:13,372:WARNING: post_status:	Failed to post new status.
+2021-11-16 17:35:17,788:INFO: spam_search:	Posted new reply: User: [@H67Aldrin], Followers: [1,991], Tweet age: [0 days 00:00:08.090923]
+2021-11-16 17:35:17,788:INFO: spam_search:		https://twitter.com/H67Aldrin/status/1460738231058665481
+2021-11-16 17:36:14,475:INFO: post_status:	Posted new status. Tweet_ID: [1460738506389700611]
+2021-11-16 17:36:14,475:INFO: post_status:		https://twitter.com/Trace34007811/status/1460738506389700611
+2021-11-16 18:05:22,678:INFO: spam_search:	Posted new reply: User: [@DropYourNFT], Followers: [100,238], Tweet age: [12:00:07.489201]
+2021-11-16 18:05:22,678:INFO: spam_search:		https://twitter.com/DropYourNFT/status/1460564608767467520
+2021-11-16 18:06:15,489:WARNING: post_status:	Media_ID: [1460746058187816967], URL: [https://api.twitter.com/1.1/statuses/update.json?status=There%27s+no+other+way+to+say+it.+%23CryptoStykz+will+DOMINATE+the+%23NFT+world%21%0D%0AIt%27s+the+only+FREE+play+to+earn+%23NFT+on+the+market%2C+and+I+can+WIN+more+just+by+playing%0D%0A%0D%0Ahttps%3A%2F%2Fdiscord.gg%2FsH7Ze9faTv%0D%0A%0D%0AOnly+available+on+OpenSea.io%21%0D%0A%0D%0Aopensea.io%2Fcollection%2Fcryptostykz%0D%0A%0D%0A%23OpenSea+%23NFTCommunity+%23NFTCollector+%23NFTS+%23PlayToEarn+%23P2E&media_ids=1460746058187816967],  JSON:
+{'errors': [{'code': 186, 'message': 'Tweet needs to be a bit shorter.'}]}
+2021-11-16 18:06:15,490:WARNING: post_status:	Failed to post new status.
+2021-11-16 18:35:26,120:INFO: spam_search:	Posted new reply: User: [@NFTHoncho], Followers: [793], Tweet age: [0 days 00:00:05.624580]
+2021-11-16 18:35:26,120:INFO: spam_search:		https://twitter.com/NFTHoncho/status/1460753376317214724
+2021-11-16 18:36:16,575:INFO: post_status:	Posted new status. Tweet_ID: [1460753614809575424]
+2021-11-16 18:36:16,575:INFO: post_status:		https://twitter.com/Trace34007811/status/1460753614809575424
+2021-11-16 19:05:29,439:INFO: spam_search:	Posted new reply: User: [@PokePxls], Followers: [221], Tweet age: [0 days 00:00:31.003639]
+2021-11-16 19:05:29,440:INFO: spam_search:		https://twitter.com/PokePxls/status/1460760834058207239
+2021-11-16 19:06:17,846:INFO: post_status:	Posted new status. Tweet_ID: [1460761169879306240]
+2021-11-16 19:06:17,846:INFO: post_status:		https://twitter.com/Trace34007811/status/1460761169879306240
+2021-11-16 19:35:31,522:INFO: spam_search:	Posted new reply: User: [@Getinthegoal1], Followers: [482], Tweet age: [0 days 00:04:30.091380]
+2021-11-16 19:35:31,522:INFO: spam_search:		https://twitter.com/Getinthegoal1/status/1460767390157922307
+2021-11-16 19:36:18,948:INFO: post_status:	Posted new status. Tweet_ID: [1460768724307398657]
+2021-11-16 19:36:18,948:INFO: post_status:		https://twitter.com/Trace34007811/status/1460768724307398657
+2021-11-16 20:05:33,603:INFO: spam_search:	Posted new reply: User: [@alexandr_rext], Followers: [2,375], Tweet age: [0 days 00:03:36.885578]
+2021-11-16 20:05:33,603:INFO: spam_search:		https://twitter.com/alexandr_rext/status/1460775173708300288
+2021-11-16 20:06:20,757:WARNING: post_status:	Media_ID: [1460776275740659716], URL: [https://api.twitter.com/1.1/statuses/update.json?status=There%27s+no+other+way+to+say+it.+%23CryptoStykz+will+DOMINATE+the+%23NFT+world%21%0D%0AIt%27s+the+only+FREE+play+to+earn+%23NFT+on+the+market%2C+and+I+can+WIN+more+just+by+playing%0D%0A%0D%0Ahttps%3A%2F%2Fdiscord.gg%2FsH7Ze9faTv%0D%0A%0D%0AOnly+available+on+OpenSea.io%21%0D%0A%0D%0Aopensea.io%2Fcollection%2Fcryptostykz%0D%0A%0D%0A%23OpenSea+%23NFTCommunity+%23NFTCollector+%23NFTS+%23PlayToEarn+%23P2E&media_ids=1460776275740659716],  JSON:
+{'errors': [{'code': 186, 'message': 'Tweet needs to be a bit shorter.'}]}
+2021-11-16 20:06:20,758:WARNING: post_status:	Failed to post new status.
+2021-11-16 20:35:35,429:WARNING: spam_search:	Failed to reply to tweet. Already replied to this ID. Tweet ID: [1460783244736143361]
+2021-11-16 20:36:21,888:INFO: post_status:	Posted new status. Tweet_ID: [1460783836187566081]
+2021-11-16 20:36:21,888:INFO: post_status:		https://twitter.com/Trace34007811/status/1460783836187566081
+2021-11-16 21:05:39,034:INFO: spam_search:	Posted new reply: User: [@RAiM_Man], Followers: [1,036], Tweet age: [0 days 00:00:47.814783]
+2021-11-16 21:05:39,034:INFO: spam_search:		https://twitter.com/RAiM_Man/status/1460790996686487556
+2021-11-16 21:06:23,897:INFO: post_status:	Posted new status. Tweet_ID: [1460791393442725889]
+2021-11-16 21:06:23,897:INFO: post_status:		https://twitter.com/Trace34007811/status/1460791393442725889
+2021-11-16 21:35:42,555:INFO: spam_search:	Posted new reply: User: [@Getinthegoal1], Followers: [484], Tweet age: [0 days 00:04:41.313632]
+2021-11-16 21:35:42,555:INFO: spam_search:		https://twitter.com/Getinthegoal1/status/1460797589259898881
+2021-11-16 21:36:25,326:INFO: post_status:	Posted new status. Tweet_ID: [1460798950001229831]
+2021-11-16 21:36:25,327:INFO: post_status:		https://twitter.com/Trace34007811/status/1460798950001229831
+2021-11-16 22:05:45,209:INFO: spam_search:	Posted new reply: User: [@Me7qNFT], Followers: [106], Tweet age: [9:05:44.332066]
+2021-11-16 22:05:45,209:INFO: spam_search:		https://twitter.com/Me7qNFT/status/1460668991823745024
+2021-11-16 22:06:26,677:WARNING: post_status:	Media_ID: [1460806501828907009], URL: [https://api.twitter.com/1.1/statuses/update.json?status=What%27s+your+favorite+%23NFT%3F+Mine+is+%23CryptoStykz+and+no+other+NFT+even+comes+close%0D%0A%0D%0A%23CryptoStykz+has+THOUSANDS+of+unique+stick+figures+with+individual+properties.+Plus+you+can+bet+on+fights+in+a+Discord+arena.%0D%0AJoin+and+play+me%21%0D%0A%0D%0A%23NFTs+%23OpenSea+%23Polygon+%23NFTCommunity+%23NFTCollector+%23Crypto+%23PlayToEarn+%23P2E&media_ids=1460806501828907009],  JSON:
+{'errors': [{'code': 186, 'message': 'Tweet needs to be a bit shorter.'}]}
+2021-11-16 22:06:26,677:WARNING: post_status:	Failed to post new status.
+2021-11-16 22:35:47,837:INFO: spam_search:	Posted new reply: User: [@EyadMuhtaseb], Followers: [10], Tweet age: [0 days 00:01:03.833719]
+2021-11-16 22:35:47,837:INFO: spam_search:		https://twitter.com/EyadMuhtaseb/status/1460813623731830790
+2021-11-16 22:36:28,080:INFO: post_status:	Posted new status. Tweet_ID: [1460814060916781059]
+2021-11-16 22:36:28,080:INFO: post_status:		https://twitter.com/Trace34007811/status/1460814060916781059
+2021-11-16 23:05:50,743:INFO: spam_search:	Posted new reply: User: [@NFTTOPIO], Followers: [1,575], Tweet age: [0 days 00:03:05.280917]
+2021-11-16 23:05:50,744:INFO: spam_search:		https://twitter.com/NFTTOPIO/status/1460820675816353803
+2021-11-16 23:06:29,084:WARNING: post_status:	Media_ID: [1460821612576583681], URL: [https://api.twitter.com/1.1/statuses/update.json?status=What+%23NFT+has+completely+random+and+unique+weapons%2C+stick+figures%2C+backgrounds%2C+and+more%3F%0D%0A%23CryptoStykz+does%2C+and+you+can+even+gamble+on+fights+in+a+Discord+server+to+win+%23FreeNFTs%21%21%0D%0A%0D%0AThere+are+no+other+FREE+play+to+earn+%23NFTs+out+there%2C+not+like+%23CryptoStykz%21%0D%0A%0D%0Ahttps%3A%2F%2Fdiscord.gg%2FsH7Ze9faTv%0D%0A%0D%0AAvailable+on+OpenSea%21%0D%0Aopensea.io%2Fcollection%2Fcryptostykz%0D%0A%0D%0A%23NFTs+%23OpenSea+%23Polygon+%23NFTCommunity+%23NFTCollector+%23Crypto+%23PlayToEarn&media_ids=1460821612576583681],  JSON:
+{'errors': [{'code': 186, 'message': 'Tweet needs to be a bit shorter.'}]}
+2021-11-16 23:06:29,085:WARNING: post_status:	Failed to post new status.
+2021-11-16 23:35:54,135:INFO: spam_search:	Posted new reply: User: [@LuthyJeff], Followers: [384], Tweet age: [0 days 00:00:01.390945]
+2021-11-16 23:35:54,135:INFO: spam_search:		https://twitter.com/LuthyJeff/status/1460829003858722822
+2021-11-16 23:36:30,170:INFO: post_status:	Posted new status. Tweet_ID: [1460829169353383942]
+2021-11-16 23:36:30,170:INFO: post_status:		https://twitter.com/Trace34007811/status/1460829169353383942

@@ -1,0 +1,25 @@
+# Any zip files
+*.zip
+
+# Any images
+*.png
+
+# Stick images folder
+stick_images/
+
+# Mini-game banners
+banners/
+
+# Fonts folder
+fonts/
+
+# Sensitive data
+key.txt
+Tweeting/Creds.py
+Tweeting/Creds2.py
+
+# General Python stuff
+venv/
+__pycache__/
+Tweeting/__pycache__/
+.idea/
