@@ -7,6 +7,7 @@ import numpy as np
 import os
 from multiprocessing import Process
 import time
+import math
 import base64
 from Tweeting.Creds import credentials
 import logging
@@ -34,11 +35,9 @@ def needs_internet(func):
     try:
         def _run(*args, **kwargs):
             func(*args, **kwargs)
-
         return _run
     except requests.exceptions.ConnectionError as exc:
         logger.error(f" No internet connection: Error: {exc.strerror}")
-
 
 
 class Tweeter:
@@ -57,9 +56,7 @@ class Tweeter:
         else:
             self.creds = credentials
 
-    #@staticmethod
-
-
+    @needs_internet
     def get_auth(self):
         """Helper function used to generate OAuth data"""
         auth = OAuth1(self.creds["consumer_key"], self.creds["consumer_key_secret"],
@@ -134,14 +131,13 @@ class Tweeter:
             status_params["media_ids"] = "{}".format(media_id)
         response = requests.post(self.status_uri, params=status_params, auth=self.get_auth())
         try:
-            msg = "Media_ID: [{}], Tweet_ID: [{}], URL: [{}]".format(media_id, response.json()["id"], response.url,)
+            msg = "Media_ID: [{}], Tweet_ID: [{}], URL: [{}]".format(media_id, response.json()["id"], response.url)
             logger.debug(msg)
             return response.json()["id"]
         except KeyError:
             msg = "Media_ID: [{}], URL: [{}],  JSON:\n{}".format(media_id, response.url, response.json())
             logger.warning(msg)
             return None
-        #return response.json()["id"]
 
     def reply_to(self, tweet_id: int, msg: str, media_id: int = None):
         """
@@ -177,15 +173,16 @@ class Tweeter:
         logger.debug(msg)
         return response.status_code == 200
 
-    def init_media(self, fpath: str):
+    def init_media(self, fpath: str, file_size: int, file_type: str):
         """Prepare the Twitter API server to receive media data"""
-        file_size = os.path.getsize(fpath)
-        file_type = os.path.splitext(fpath)[1]
         upload_params = {
             "command": "INIT",
             "total_bytes": file_size,
             "media_type": file_type
         }
+        if file_size > 5120000:
+            upload_params["media_category"] = "amplify_video"
+            print("Amplifying size")
         response = requests.post(self.upload_uri, params=upload_params, auth=self.get_auth())
         try:
             msg = "Image Path: [{}], Image Size: [{}], Media_ID: [{}], URL: [{}]".format(fpath, file_size,
@@ -198,18 +195,82 @@ class Tweeter:
             logger.warning(msg)
         return response.json()["media_id"]
 
-    def append_media(self, fpath: str, media_id: int):
-        """Uploads a single chunk of data to API server"""
+    def await_upload(self, media_id: id):
+        """
+        Loops continuously until the media is finished uploading to the Twitter server
+        :param media_id: ID of the media to check on
+        :return: None
+        """
+        while True:
+            info = self.upload_status(media_id)
+            try:
+                status = info["state"]
+                log_msg = "Media_ID: [{}], Status: [{}]".format(media_id, status)
+                logger.debug(log_msg)
+            except KeyError:
+                time.sleep(2)
+                continue
+            if status == "succeeded" or status == "failed":
+                return
+            time.sleep(info["check_after_secs"])
+
+    def upload_status(self, media_id: int):
+        """
+        Checks the upload status of a media object to see if it has finished uploading
+        :param media_id: ID of the media being uploaded
+        :return processing_info: Dictionary containing the state and wait time for the upload
+        """
+        status_params = {
+            "command": "STATUS",
+            "media_id": media_id
+        }
+        response = requests.get(self.upload_uri, params=status_params, auth=self.get_auth())
+        log_msg = "Media_ID: [{}], URL: [{}]".format(media_id, response.url)
+        logger.debug(log_msg)
+        try:
+            return response.json()["processing_info"]
+        except KeyError:
+            return response.json()
+
+    def chunk_media(self, fpath: str, media_id: int, file_size: int):
+        """
+        Breaks the file being uploaded into 1mb chunks and uploads them one by one, in order
+        :param fpath: Path to the file being uploaded
+        :param media_id: ID of the media being uploaded (from init_media())
+        :param file_size: Size of the file in bytes
+        :return: None
+        """
+        one_megabyte = 1000000
+        num_chunks = 1 if file_size < one_megabyte else math.ceil(file_size / one_megabyte)
+        _file = open(fpath, "rb")
+        file_bytes = _file.read()
+        log_msg = "File Path: [{}], File Size: [{}], Media_ID: [{}]".format(fpath, file_size, media_id)
+        logger.debug(log_msg)
+        for i in range(0, num_chunks):
+            b = i * one_megabyte
+            chunk = file_bytes[b:] if i == (num_chunks-1) else file_bytes[b:b+one_megabyte]
+            self.append_media_chunk(chunk, media_id, i)
+            log_msg = "Segment index: [{}/{}], Chunk start: [{}]".format(i, num_chunks, b)
+            logger.debug(log_msg)
+        _file.close()
+
+    def append_media_chunk(self, file_bytes: bytes, media_id: int, segment_index: int):
+        """
+        Upload a single chunk of data to the Twitter API server
+        :param file_bytes: Bytes object of the file's contents
+        :param media_id: ID of the media being uploaded (from init_media())
+        :param segment_index: The index of the chunk being uploaded (i/n)
+        :return valid_response:
+        """
         append_params = {
             "command": "APPEND",
             "media_id": media_id,
-            "segment_index": 0
+            "segment_index": segment_index
         }
-
-        files = {"media": open(fpath, "rb")}
+        files = {"media": file_bytes}
         response = requests.post(self.upload_uri, files=files, params=append_params, auth=self.get_auth())
-        msg = "Image Path: [{}], Media_ID: [{}], URL: [{}]".format(fpath, media_id, response.url)
-        logger.debug(msg)
+        log_msg = "Media_ID: [{}], Segment index: [{}], URL: [{}]".format(media_id, segment_index, response.url)
+        logger.debug(log_msg)
         return response.status_code == 200
 
     def finalize_media(self, media_id: int):
@@ -235,9 +296,14 @@ class Tweeter:
         :param fpath: Path pointing to file to be uploaded with tweet
         :return final_media_id: ID for the media that was just uploaded
         """
-        media_id = self.init_media(fpath)
-        self.append_media(fpath, media_id)
+        f_size = os.path.getsize(fpath)
+        f_type = os.path.splitext(fpath)[1]
+        media_id = self.init_media(fpath, f_size, f_type)
+        self.chunk_media(fpath, media_id, f_size)
         final_media_id = self.finalize_media(media_id)
+        # Wait for the file to upload to Twitter before making the tweet
+        if f_type not in [".png", ".jpg", ".jpeg", ".gif"]:
+            self.await_upload(final_media_id)
         msg = "Finalized image upload. Image Path: [{}], Media_ID".format(fpath, final_media_id)
         logger.debug(msg)
         return final_media_id
@@ -371,7 +437,7 @@ class Spammer:
         :return: None
         """
         for tweet_df in self.iter_search_results(search_terms):
-            self.twitter.retweet(tweet_df.iloc[0]["tweet_id"])
+            #self.twitter.retweet(tweet_df.iloc[0]["tweet_id"])
             lt_5m = tweet_df["age"] < datetime.timedelta(days=0, minutes=5, seconds=0)
             recent_tweets = tweet_df[lt_5m]
             if not len(recent_tweets):
@@ -439,21 +505,20 @@ The basic gist is:
     Start the spam loop with .start_spam()
 """
 
-from Tweeting.Creds2 import credentials as creds2
 
-#sp = Spammer(tweet_delay=30)
-sp2 = Spammer(tweet_delay=30, new_creds=creds2)
+sp = Spammer(tweet_delay=30)
 
 if __name__ == "__main__":
-    #print(sp.twitter.check_auth())
-    print(sp2.twitter.check_auth())
+    print(sp.twitter.check_auth())
+    #print(sp2.twitter.check_auth())
 
-    #sp.start_spam()
-    #time.sleep(60)
-    #sp.start_status_spam()
+
+    sp.start_spam()
+    time.sleep(60)
+    sp.start_status_spam()
     #time.sleep(540)
 
-    sp2.start_spam()
-    time.sleep(60)
-    sp2.start_status_spam()
+    #sp2.start_spam()
+    #time.sleep(60)
+    #sp2.start_status_spam()
 
