@@ -12,12 +12,6 @@ import base64
 from Tweeting.Creds import credentials
 import logging
 
-"""
-logging.basicConfig(level=logging.INFO, filename="TwitterSpamInfo.log",
-                    format="%(asctime)s:%(levelname)s:%(funcName)s:%(message)s")
-logging.basicConfig(level=logging.DEBUG, filename="TwitterSpamDebug.log",
-                    format="%(asctime)s:%(levelname)s:%(funcName)s:%(message)s")
-"""
 
 logger = logging.getLogger("TwitterSpamLogger")
 info_handler = logging.FileHandler("TwitterSpamInfo.log")
@@ -56,14 +50,14 @@ class Tweeter:
         else:
             self.creds = credentials
 
-    @needs_internet
+    #@needs_internet
     def get_auth(self):
         """Helper function used to generate OAuth data"""
         auth = OAuth1(self.creds["consumer_key"], self.creds["consumer_key_secret"],
                       self.creds["access_token"], self.creds["access_token_secret"])
         return auth
 
-    @needs_internet
+    #@needs_internet
     def check_auth(self):
         """Verifies that the credentials are valid"""
         key_secret = "{}:{}".format(self.creds["consumer_key"], self.creds["consumer_key_secret"]).encode("ascii")
@@ -77,8 +71,10 @@ class Tweeter:
             "grant_type": "client_credentials"
         }
         res = requests.post(self.auth_uri, headers=auth_headers, data=auth_data)
-        logger.debug(f"Valid Twitter API credentials: {res.status_code == 200}")
-        return res.status_code == 200
+
+        valid = res.status_code == 200
+        logger.debug(f"Valid Twitter API credentials: {valid}")
+        return valid
 
     def get_tweet(self, tweet_id: int):
         """
@@ -182,7 +178,6 @@ class Tweeter:
         }
         if file_size > 5120000:
             upload_params["media_category"] = "amplify_video"
-            print("Amplifying size")
         response = requests.post(self.upload_uri, params=upload_params, auth=self.get_auth())
         try:
             msg = "Image Path: [{}], Image Size: [{}], Media_ID: [{}], URL: [{}]".format(fpath, file_size,
@@ -193,7 +188,10 @@ class Tweeter:
             msg = "Image Path: [{}], Image Size: [{}], URL: [{}],  JSON:\n{}".format(fpath, file_size, response.url,
                                                                                      response.json())
             logger.warning(msg)
-        return response.json()["media_id"]
+        try:
+            return response.json()["media_id"]
+        except KeyError:
+            print(response.json())
 
     def await_upload(self, media_id: id):
         """
@@ -509,9 +507,9 @@ The basic gist is:
 sp = Spammer(tweet_delay=30)
 
 if __name__ == "__main__":
-    print(sp.twitter.check_auth())
-    #print(sp2.twitter.check_auth())
 
+    #i = sp.twitter.post_status("I am willing to kill for #NFTs")
+    #print(i)
 
     sp.start_spam()
     time.sleep(60)
