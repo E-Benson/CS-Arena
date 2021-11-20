@@ -109,16 +109,18 @@ class Tweeter:
             "count": count
         }
         response = requests.get(self.search_uri, headers=search_headers, params=search_params)
-        log_msg = "Query: [{}], URL: [{}]".format(query, response.url)
+
+        results = response.json()["statuses"]
+        log_msg = "Query: [{}], Num Results: [{}], URL: [{}]".format(query, len(results), response.url)
         logger.debug(log_msg)
-        return response.json()["statuses"]
+        return results
 
     def post_status(self, msg: str, media_id: int = None):
         """
         Post a regular tweet with or without an img
         :param msg: The body of the tweet being made
         :param media_id: ID of the img to include with the tweet
-        :return valid_response:
+        :return status_id: ID of the status that was posted
         """
         status_params = {
             "status": msg
@@ -131,7 +133,7 @@ class Tweeter:
             logger.debug(msg)
             return response.json()["id"]
         except KeyError:
-            msg = "Media_ID: [{}], URL: [{}],  JSON:\n{}".format(media_id, response.url, response.json())
+            msg = "Media_ID: [{}], URL: [{}],\nJSON: {}".format(media_id, response.url, response.json())
             logger.warning(msg)
             return None
 
@@ -150,8 +152,15 @@ class Tweeter:
         if media_id is not None:
             status_params["media_ids"] = "{}".format(media_id)
         response = requests.post(self.status_uri,  params=status_params, auth=self.get_auth())
-        msg = "Media_ID: [{}], Tweet_ID: [{}], URL: [{}]".format(media_id, tweet_id, response.url)
-        logger.debug(msg)
+        try:
+            response_content = response.json()
+            _ = response_content["id"]
+            msg = "Media_ID: [{}], Tweet_ID: [{}], URL: [{}]".format(media_id, tweet_id, response.url)
+            logger.debug(msg)
+        except KeyError:
+            err_msg = response.content
+            msg = "Status_Code: {}, Response: {}".format(response.status_code, err_msg)
+            logger.debug(msg)
         return response.status_code == 200
 
     def retweet(self, tweet_id: int):
@@ -309,13 +318,13 @@ class Tweeter:
 
 class Spammer:
     """Used to make searches and automatically reply to tweets"""
-    used_status_ids = list()
 
     def __init__(self, tweet_delay: int = 5, new_creds: dict = None):
         """
         Initializes the Spammer object
         :param tweet_delay: Number of minutes to wait in between each tweet
         """
+        self.used_status_ids = list()
         self.statuses = pd.read_csv("statuses.csv")["status"]
         self.replies = pd.read_csv("replies.csv")["reply"]
         self.search_terms = pd.read_csv("hashtags.csv")["tag"]
@@ -407,7 +416,7 @@ class Spammer:
         """
         for term in search_terms:
             term_dict = pd.DataFrame(columns=["tweet_id", "handle", "followers", "age", "reply_to"])
-            term_results = self.twitter.search(term, count=10)
+            term_results = self.twitter.search(term, count=25)
             for tweet in term_results:
                 term_dict = term_dict.append(self.tweet_to_df(tweet), ignore_index=True)
             yield term_dict.sort_values(by="followers", ascending=False)
@@ -416,10 +425,13 @@ class Spammer:
         """
         Replies to the tweet that's taken as a parameter using a random body of text from self.statuses
         :param tweet: Pandas Series object of tweet
-        :return: None
+        :return valid_response: Status code from twitter.reply_to() call
         """
         if tweet["tweet_id"] in self.used_status_ids:
-            return
+            msg = "Already replied to tweet_id: [{}]\nused_status_ids: [{}]".format(tweet["tweet_id"],
+                                                                                    self.used_status_ids)
+            logger.warning(msg)
+            return False
         content = "@{}\n{}".format(tweet["handle"], self.rand_reply())
         img_path = self.rand_img()
         media_id = self.twitter.upload_media(img_path)
@@ -435,30 +447,32 @@ class Spammer:
         :return: None
         """
         for tweet_df in self.iter_search_results(search_terms):
-            #self.twitter.retweet(tweet_df.iloc[0]["tweet_id"])
             lt_5m = tweet_df["age"] < datetime.timedelta(days=0, minutes=5, seconds=0)
             recent_tweets = tweet_df[lt_5m]
             if not len(recent_tweets):
+                # Skip this search term if there were no recent tweets in the search results
+                msg = "No recent search results"
                 continue
             most_popular_tweet = recent_tweets.iloc[0]
             if most_popular_tweet["reply_to"] is not None:
+                # If this tweet was a reply, get the tweet they replied to
                 reply_to_data = self.twitter.get_tweet(most_popular_tweet["reply_to"])
                 most_popular_tweet = self.tweet_to_df(reply_to_data)
-            if not (self.reply_to_tweet(most_popular_tweet)):
-                msg = "Failed to reply to tweet. Already replied to this ID. Tweet ID: [{}]".format(most_popular_tweet["tweet_id"])
+            if not self.reply_to_tweet(most_popular_tweet):
+                # reply_to_tweet received a bad status code
+                msg = "Failed to reply to tweet. Tweet ID: [{}]".format(most_popular_tweet["tweet_id"])
                 logger.warning(msg)
             else:
-                #print("Retweeted: ", self.twitter.retweet(most_popular_tweet["tweet_id"]))
                 msg = "Posted new reply: User: [@{}], Followers: [{:,}], Tweet age: [{}]".format(most_popular_tweet['handle'],
                                                                                                  most_popular_tweet['followers'],
                                                                                                  most_popular_tweet['age'])
                 link = "\thttps://twitter.com/{}/status/{}".format(most_popular_tweet['handle'],
-                                                                 most_popular_tweet['tweet_id'])
+                                                                   most_popular_tweet['tweet_id'])
                 logger.info(msg)
                 logger.info(link)
                 print("> Replied to user: {} ({:,} followers) - tweeted [{}] ago".format(most_popular_tweet['handle'],
-                                                                                       most_popular_tweet['followers'],
-                                                                                       most_popular_tweet['age']))
+                                                                                         most_popular_tweet['followers'],
+                                                                                         most_popular_tweet['age']))
                 print("\t> https://twitter.com/{}/status/{}".format(most_popular_tweet['handle'],
                                                                     most_popular_tweet['tweet_id']))
             # Prevent too much spamming on the twitter servers
@@ -489,34 +503,13 @@ class Spammer:
             self.wait(self.tweet_delay, process_name="status_loop")
 
 
-
-
-
-
-
-"""
-The basic gist is:
-    Set the search terms for the Spammer with .set_search_terms(['#nft', '#opensea']) etc
-    OR
-    Set the search terms in the 'hashtags.csv' file and those will be used by default
-    THEN
-    Start the spam loop with .start_spam()
-"""
-
-
 sp = Spammer(tweet_delay=30)
 
 if __name__ == "__main__":
-
-    #i = sp.twitter.post_status("I am willing to kill for #NFTs")
-    #print(i)
+    print(sp.twitter.check_auth())
 
     sp.start_spam()
-    time.sleep(60)
+    time.sleep(600)
     sp.start_status_spam()
-    #time.sleep(540)
 
-    #sp2.start_spam()
-    #time.sleep(60)
-    #sp2.start_status_spam()
 
