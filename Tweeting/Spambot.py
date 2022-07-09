@@ -178,6 +178,47 @@ class Tweeter:
         logger.debug(msg)
         return response.status_code == 200
 
+    def follow(self, user_id: int, user_name: str):
+        """
+        Follow the user specified by the user ID and username
+        :param user_id: ID of the user to follow
+        :param user_name: Name of the user. NOT the @handle
+        :return: valid_response: Boolean value of successful post
+        """
+        friendship_uri = "{}1.1/friendships/create.json".format(self.base_uri)
+        follow_headers = {
+            "Authorization": "Bearer {}".format(self.creds["bearer_token"])
+        }
+        follow_params = {
+            "Name": user_name,
+            "user_id": user_id,
+            "follow": True
+        }
+        response = requests.post(friendship_uri, params=follow_params, headers=follow_headers, auth=self.get_auth())
+        msg = "User_ID: [{}], User_name: [{}], URL: [{}]".format(user_id, user_name, response.url)
+        logger.debug(msg)
+        return response.status_code == 200
+
+    def like(self, user_name: str, tweet_id: int):
+        """
+        Likes/favorites a tweet
+        :param user_name: Name of the user who owns the tweet. NOT the @handle
+        :param tweet_id: ID of the tweet to like
+        :return: valid_response: Boolean value of a successful post
+        """
+        like_uri = "{}1.1/favorites/create.json".format(self.base_uri)
+        like_headers = {
+            "Authorization": "Bearer {}".format(self.creds["bearer_token"])
+        }
+        like_params = {
+            "Name": user_name,
+            "id": tweet_id
+        }
+        response = requests.post(like_uri, params=like_params, headers=like_headers, auth=self.get_auth())
+        msg = "Tweet_ID: [{}], User_name: [{}], URL: [{}]".format(tweet_id, user_name, response.url)
+        logger.debug(msg)
+        return response.status_code == 200
+
     def init_media(self, fpath: str, file_size: int, file_type: str):
         """Prepare the Twitter API server to receive media data"""
         upload_params = {
@@ -402,6 +443,8 @@ class Spammer:
         data = {
             "tweet_id": tweet["id"],
             "handle": tweet["user"]["screen_name"],
+            "user_name": tweet["user"]["name"],
+            "user_id": tweet["user"]["id"],
             "followers": tweet["user"]["followers_count"],
             "age": now - datetime.datetime.strptime(tweet["created_at"], "%a %b %d %H:%M:%S %z %Y"),
             "reply_to": tweet["in_reply_to_status_id"]
@@ -423,7 +466,8 @@ class Spammer:
 
     def reply_to_tweet(self, tweet: pd.Series):
         """
-        Replies to the tweet that's taken as a parameter using a random body of text from self.statuses
+        Replies to the tweet that's taken as a parameter using a random body of text from self.statuses.
+        Also likes the tweet and follows the creator.
         :param tweet: Pandas Series object of tweet
         :return valid_response: Status code from twitter.reply_to() call
         """
@@ -436,6 +480,8 @@ class Spammer:
         img_path = self.rand_img()
         media_id = self.twitter.upload_media(img_path)
         tweeted = self.twitter.reply_to(tweet["tweet_id"], content, media_id)
+        self.twitter.follow(tweet['user_id'], tweet["user_name"])
+        self.twitter.like(tweet["user_name"], tweet["tweet_id"])
         self.used_status_ids.append(tweet["tweet_id"])
         return tweeted
 
@@ -506,8 +552,12 @@ class Spammer:
 sp = Spammer(tweet_delay=30)
 
 if __name__ == "__main__":
-    print(sp.twitter.check_auth())
-
+    # import pprint
+    # print(sp.twitter.check_auth())
+    # re = sp.twitter.search("cashapp")
+    # pprint.pprint(re)
+    # x = sp.twitter.follow(re[0]['user']['id'], re[0]['user']['name'])
+    # pprint.pprint(x)
     sp.start_spam()
     time.sleep(600)
     sp.start_status_spam()

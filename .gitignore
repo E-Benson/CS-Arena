@@ -2,16 +2,10 @@
 *.zip
 
 # Any images
-*.png
+/*.png
 
 # Stick images folder
 stick_images/
-
-# Mini-game banners
-banners/
-
-# Fonts folder
-fonts/
 
 # Sensitive data
 key.txt
@@ -23,6 +17,13 @@ Tweeting/*.log
 
 # General note file
 notes.txt
+
+# Test directory
+testD/
+
+# Supporting CSVs
+user_points.csv
+Leaderboard.csv
 
 # General Python stuff
 venv/
